@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kerem Beyaz · Portfolio</title>
+  <meta name="description" content="Kerem Beyaz — Computer Engineering student at Bursa Uludağ University. Machine learning, deep learning, LLM-based agents and MLOps. Live model demo running in your browser.">
+  <meta property="og:title" content="Kerem Beyaz · Portfolio">
+  <meta property="og:description" content="Computer Engineering student · AI Engineering & MLOps. Projects built with PyTorch, scikit-learn and FastAPI, plus a model you can run in your browser.">
+  <meta property="og:image" content="https://avatars.githubusercontent.com/u/280639600?v=4">
+  <meta property="og:type" content="website">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%230f172a'/><text x='50' y='68' font-size='52' font-family='monospace' font-weight='700' text-anchor='middle' fill='%2338bdf8'>KB</text></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css?v=9">
+</head>
+<body>
+  <a class="skip" href="#projeler" data-i18n="skip">İçeriğe geç</a>
+  <div class="progress" id="progress" aria-hidden="true"></div>
+  <canvas id="netBg" class="net-bg" aria-hidden="true"></canvas>
+  <div class="cursor-dot" id="cursorDot" aria-hidden="true"></div>
+  <div class="cursor-ring" id="cursorRing" aria-hidden="true"></div>
+
+  <header class="nav">
+    <div class="container nav-inner">
+      <a class="brand" href="#top"><span class="brand-mark">KB</span><span class="brand-name">Kerem Beyaz</span><span class="brand-status mono" id="clock" aria-hidden="true"></span></a>
+      <nav class="nav-links" aria-label="Main menu">
+        <a href="#hakkimda" data-i18n="nav_about">Hakkımda</a>
+        <a href="#projeler" data-i18n="nav_projects">Projeler</a>
+        <a href="#demo" data-i18n="nav_demo">Canlı Demo</a>
+        <a href="#deneyim" data-i18n="nav_exp">Deneyim</a>
+        <a href="#github" data-i18n="nav_github">GitHub</a>
+        <a href="#yetenekler" data-i18n="nav_skills">Yetenekler</a>
+        <a href="#iletisim" data-i18n="nav_contact">İletişim</a>
+      </nav>
+      <div class="nav-actions">
+        <button class="btn-icon" id="langToggle" type="button" aria-label="Switch language">EN</button>
+        <button class="btn-icon nav-burger" id="navToggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="mobileMenu">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path class="ln1" d="M4 7h16"/><path class="ln2" d="M4 12h16"/><path class="ln3" d="M4 17h16"/></svg>
+        </button>
+        <button class="btn-icon" id="themeToggle" type="button" aria-label="Toggle theme">
+          <svg class="icon-sun" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+          <svg class="icon-moon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+        </button>
+      </div>
+    </div>
+    <nav class="mobile-menu" id="mobileMenu" aria-label="Mobile menu" hidden>
+      <a href="#hakkimda" data-i18n="nav_about">Hakkımda</a>
+      <a href="#projeler" data-i18n="nav_projects">Projeler</a>
+      <a href="#demo" data-i18n="nav_demo">Canlı Demo</a>
+      <a href="#deneyim" data-i18n="nav_exp">Deneyim</a>
+      <a href="#github" data-i18n="nav_github">GitHub</a>
+      <a href="#yetenekler" data-i18n="nav_skills">Yetenekler</a>
+      <a href="#iletisim" data-i18n="nav_contact">İletişim</a>
+    </nav>
+  </header>
+
+  <main id="top">
+    <!-- HERO -->
+    <section class="hero-wrap">
+      <canvas id="net" class="net" aria-hidden="true"></canvas>
+      <div class="hero container">
+        <div class="hero-text">
+          <img class="avatar-mobile" src="https://avatars.githubusercontent.com/u/280639600?v=4" alt="Kerem Beyaz" width="96" height="96" loading="eager">
+          <p class="eyebrow mono" data-i18n="hero_eyebrow">Bilgisayar Mühendisliği Öğrencisi · AI Engineering &amp; MLOps</p>
+          <h1 id="heroTitle"></h1>
+          <p class="typed mono"><span class="prompt">$</span> <span id="typed"></span><span class="caret" aria-hidden="true"></span></p>
+          <p class="lead" data-i18n="hero_lead">Bursa Uludağ Üniversitesi'nde Bilgisayar Mühendisliği okuyorum. Gerçek endüstriyel veri setleri üzerinde makine öğrenmesi ve derin öğrenme modelleri geliştiriyor, bunları web uygulaması olarak yayına alıyorum.</p>
+          <div class="hero-cta">
+            <a class="btn btn-primary" href="#demo" data-i18n="hero_cta1">Modeli Tarayıcıda Dene</a>
+            <a class="btn btn-ghost" href="https://github.com/kkerembeyaz" target="_blank" rel="noopener">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.39 7.86 10.91.58.1.79-.25.79-.56v-2.17c-3.2.7-3.87-1.37-3.87-1.37-.52-1.33-1.28-1.68-1.28-1.68-1.04-.71.08-.7.08-.7 1.15.08 1.76 1.18 1.76 1.18 1.03 1.76 2.7 1.25 3.36.96.1-.75.4-1.25.73-1.54-2.55-.29-5.24-1.28-5.24-5.68 0-1.26.45-2.28 1.18-3.09-.12-.29-.51-1.46.11-3.04 0 0 .97-.31 3.17 1.18a11 11 0 0 1 5.77 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.58.23 2.75.11 3.04.74.81 1.18 1.83 1.18 3.09 0 4.41-2.69 5.38-5.25 5.67.41.36.78 1.06.78 2.14v3.17c0 .31.21.67.8.56A11.5 11.5 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5z"/></svg>
+              GitHub
+            </a>
+            <a class="btn btn-ghost" href="https://www.linkedin.com/in/kkerembeyaz" target="_blank" rel="noopener">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.45 20.45h-3.55v-5.57c0-1.33-.03-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.36V9h3.41v1.56h.05c.47-.9 1.63-1.85 3.36-1.85 3.6 0 4.27 2.37 4.27 5.45v6.29zM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0z"/></svg>
+              LinkedIn
+            </a>
+          </div>
+          <ul class="hero-meta mono">
+            <li><span class="dot"></span><span data-i18n="hero_loc">Bursa, Türkiye</span></li>
+            <li><span class="dot"></span><span data-i18n="hero_focus">PyTorch · scikit-learn · FastAPI</span></li>
+          </ul>
+        </div>
+
+        <div class="hero-visual">
+          <div class="avatar-ring">
+            <img src="https://avatars.githubusercontent.com/u/280639600?v=4" alt="Kerem Beyaz" width="200" height="200" loading="eager">
+          </div>
+          <div class="term mono" id="term">
+            <div class="term-head"><span></span><span></span><span></span><em data-i18n="term_title">terminal — "help" yazmayı dene</em></div>
+            <div class="term-body" id="termOut" aria-live="polite"></div>
+            <form class="term-line" id="termForm" autocomplete="off">
+              <label for="termIn" class="term-prompt">visitor@kerem:~$</label>
+              <input id="termIn" type="text" spellcheck="false" aria-label="Terminal command">
+            </form>
+            <div class="term-chips" id="termChips"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ABOUT -->
+    <section id="hakkimda" class="section container">
+      <div class="section-head reveal">
+        <span class="section-num mono">01</span>
+        <h2 data-i18n="about_title">Hakkımda</h2>
+      </div>
+      <div class="about-grid">
+        <div class="about-text panel reveal">
+          <p data-i18n="about_p1"></p>
+          <p data-i18n="about_p2"></p>
+          <p data-i18n="about_p3"></p>
+        </div>
+        <aside class="about-stats">
+          <div class="stat reveal"><strong class="count" data-to="8">0</strong><span data-i18n="stat_repos">Açık kaynak depo</span></div>
+          <div class="stat reveal"><strong class="count" data-to="1">0</strong><span data-i18n="stat_live">Canlıda çalışan ML uygulaması</span></div>
+          <div class="stat reveal"><strong class="count" data-to="3">0</strong><span data-i18n="stat_e2e">Uçtan uca ML projesi</span></div>
+          <div class="stat reveal"><strong class="count" data-to="2">0</strong><span data-i18n="stat_agents">Stajda geliştirilen LLM ajanı</span></div>
+        </aside>
+      </div>
+    </section>
+
+    <!-- PROJECTS -->
+    <section id="projeler" class="section container">
+      <div class="section-head reveal">
+        <span class="section-num mono">02</span>
+        <h2 data-i18n="projects_title">Öne Çıkan Projeler</h2>
+      </div>
+      <div class="projects featured" id="featuredProjects"></div>
+      <h3 class="sub-title reveal" data-i18n="projects_more">Diğer Projeler ve Notlar</h3>
+      <div class="projects compact" id="otherProjects"></div>
+    </section>
+
+    <!-- LIVE DEMO -->
+    <section id="demo" class="section container">
+      <div class="section-head reveal">
+        <span class="section-num mono">03</span>
+        <h2 data-i18n="demo_title">Canlı Demo: Arıza Tahmini</h2>
+      </div>
+      <div class="demo reveal">
+        <p class="demo-intro" data-i18n="demo_intro">Aşağıdaki model, makine arıza sınıflandırıcı projesinde PyTorch ile eğittiğim ağın ta kendisi. Ağırlıkları dışa aktarıp ileri geçişi JavaScript ile yeniden yazdım; yani sunucuya hiçbir veri gitmiyor, tahmin tarayıcınızda hesaplanıyor. Kaydırıcıları oynatın.</p>
+        <div class="demo-controls">
+          <div class="demo-presets" id="presets"></div>
+          <div class="field">
+            <label data-i18n="f_type">Ürün kalite sınıfı</label>
+            <div class="seg" id="typeSeg">
+              <button type="button" data-v="L" class="on">L</button>
+              <button type="button" data-v="M">M</button>
+              <button type="button" data-v="H">H</button>
+            </div>
+          </div>
+          <div class="field"><label><span data-i18n="f_air">Hava sıcaklığı</span> <output id="o_air" class="mono"></output></label><input type="range" id="air" min="295" max="305" step="0.1" value="298.1"></div>
+          <div class="field"><label><span data-i18n="f_proc">Proses sıcaklığı</span> <output id="o_proc" class="mono"></output></label><input type="range" id="proc" min="305" max="315" step="0.1" value="308.6"></div>
+          <div class="field"><label><span data-i18n="f_rpm">Devir</span> <output id="o_rpm" class="mono"></output></label><input type="range" id="rpm" min="1150" max="2900" step="1" value="1551"></div>
+          <div class="field"><label><span data-i18n="f_torque">Tork</span> <output id="o_torque" class="mono"></output></label><input type="range" id="torque" min="3" max="80" step="0.1" value="42.8"></div>
+          <div class="field"><label><span data-i18n="f_wear">Takım aşınması</span> <output id="o_wear" class="mono"></output></label><input type="range" id="wear" min="0" max="250" step="1" value="0"></div>
+        </div>
+        <div class="demo-out">
+          <div class="pred" id="pred">
+            <span class="pred-label mono" data-i18n="pred_label">Tahmin</span>
+            <strong id="predName">—</strong>
+            <span class="pred-conf mono" id="predConf"></span>
+          </div>
+          <div class="bars" id="bars"></div>
+          <div class="rules mono" id="rules"></div>
+          <p class="demo-note" data-i18n="demo_note">Model: Linear(6,16) → ReLU → Linear(16,16) → ReLU → Linear(16,6). Girdi, eğitimdeki StandardScaler ile ölçekleniyor. Kural satırları AI4I veri setinin arıza üretme koşulları; modelin bunlara ne kadar yaklaştığını görebilirsiniz.</p>
+          <a class="btn btn-ghost btn-sm" href="https://github.com/kkerembeyaz/machine-failure-type-classifier" target="_blank" rel="noopener" data-i18n="demo_repo">Projenin kaynak kodu ve README</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- EXPERIENCE -->
+    <section id="deneyim" class="section container">
+      <div class="section-head reveal">
+        <span class="section-num mono">04</span>
+        <h2 data-i18n="exp_title">Deneyim</h2>
+      </div>
+      <div class="panel reveal"><ol class="timeline" id="expTimeline"></ol></div>
+    </section>
+
+    <!-- GITHUB LIVE -->
+    <section id="github" class="section container">
+      <div class="section-head reveal">
+        <span class="section-num mono">05</span>
+        <h2 data-i18n="gh_title">GitHub'da Neler Oluyor</h2>
+        <span class="live-pill mono" id="ghStatus"><span class="dot"></span><span data-i18n="gh_live">canlı · GitHub API</span></span>
+      </div>
+      <div class="gh-grid">
+        <div class="gh-card reveal">
+          <h3 class="mono" data-i18n="gh_heat">son 90 gün · commit aktivitesi</h3>
+          <div class="heat" id="heat"></div>
+          <div class="heat-legend mono"><span data-i18n="gh_less">az</span><i class="l0"></i><i class="l1"></i><i class="l2"></i><i class="l3"></i><i class="l4"></i><span data-i18n="gh_more">çok</span></div>
+          <div class="gh-stats" id="ghStats"></div>
+        </div>
+        <div class="gh-card reveal">
+          <h3 class="mono">$ git log --author=kkerembeyaz</h3>
+          <ul class="gitlog mono" id="gitlog"><li class="muted" data-i18n="gh_loading">yükleniyor…</li></ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- SKILLS -->
+    <section id="yetenekler" class="section container">
+      <div class="section-head reveal">
+        <span class="section-num mono">06</span>
+        <h2 data-i18n="skills_title">Yetenekler</h2>
+      </div>
+      <div class="skills-grid" id="skillsGrid"></div>
+    </section>
+
+    <!-- EDUCATION -->
+    <section id="egitim" class="section container">
+      <div class="section-head reveal">
+        <span class="section-num mono">07</span>
+        <h2 data-i18n="edu_title">Eğitim</h2>
+      </div>
+      <div class="edu-grid">
+        <div class="panel reveal"><ol class="timeline" id="timeline"></ol></div>
+        <div>
+          <h3 class="sub-title cert-title" data-i18n="beyond_title">Kod Dışında</h3>
+          <ul class="certs" id="beyond"></ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="iletisim" class="section container contact">
+      <div class="contact-card reveal">
+        <h2 data-i18n="contact_title">Birlikte çalışalım</h2>
+        <p data-i18n="contact_p">Staj, proje iş birliği ya da sadece veri ve makine öğrenmesi üzerine sohbet için bana LinkedIn üzerinden ulaşabilirsiniz.</p>
+        <div class="hero-cta">
+          <a class="btn btn-primary" href="https://www.linkedin.com/in/kkerembeyaz" target="_blank" rel="noopener" data-i18n="contact_btn">LinkedIn'den Yaz</a>
+          <a class="btn btn-ghost" href="https://github.com/kkerembeyaz" target="_blank" rel="noopener">github.com/kkerembeyaz</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer container">
+    <span>© <span id="year"></span> Kerem Beyaz</span>
+    <span class="mono" data-i18n="footer_note">HTML · CSS · JS ile elle yazıldı · GitHub Pages'te yayında · hiçbir şey sunucuya gitmiyor</span>
+  </footer>
+
+  <script src="model.js?v=2"></script>
+  <script src="script.js?v=9"></script>
+</body>
+</html>
