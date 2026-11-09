@@ -8,6 +8,36 @@ const GITHUB = "https://github.com/kkerembeyaz";
 
 const PROJECTS = [
   {
+    id: "steel-defect",
+    featured: true,
+    date: { tr: "Kasım 2026", en: "Nov 2026" },
+    live: "https://steel-surface-defect-inspector.onrender.com",
+    repo: `${GITHUB}/steel-surface-defect-inspector`,
+    title: { tr: "Çelik Yüzey Kusur Denetçisi", en: "Steel Surface Defect Inspector" },
+    desc: {
+      tr: "NEU-DET veri setinde YOLOv11 ile eğitilmiş nesne tespiti modeli: çelik sac görüntüsünde 6 kusur türünü (çatlak, kalıntı, leke, çukurlaşma, hadde tufalı, çizik) konumuyla buluyor ve bulguları LLM ya da kural tabanlı bir mühendislik kalite raporuna dönüştürüyor. Gradio arayüzüyle Render'da canlı.",
+      en: "An object-detection model trained with YOLOv11 on NEU-DET: finds and localises 6 defect types (crazing, inclusion, patches, pitting, rolled-in scale, scratches) on steel sheet images and turns the findings into an LLM- or rule-based engineering quality report. Live on Render with a Gradio UI."
+    },
+    highlights: {
+      tr: [
+        "VOC XML etiketleri YOLO formatına çevrilip seed'li stratified 70/15/15 bölme ile eğitim/doğrulama/test ayrıldı; eğitim Colab T4 üzerinde tekrarlanabilir not defteriyle yapıldı",
+        "Rapor modülü görseli değil YOLO'nun yapılandırılmış JSON çıktısını okur; HF_TOKEN yoksa veya API düşerse halüsinasyonsuz kural tabanlı rapora otomatik geçer",
+        "Zayıf sınıflar (crazing, rolled-in scale) literatürle karşılaştırılarak dürüstçe raporlandı; domain shift ve laboratuvar koşulları sınırlılık olarak belgelendi"
+      ],
+      en: [
+        "VOC XML labels converted to YOLO format with a seeded stratified 70/15/15 split; training reproducible via a Colab T4 notebook",
+        "The report module reads YOLO's structured JSON, not the image; without HF_TOKEN or on API failure it falls back to a hallucination-free rule-based report",
+        "Weak classes (crazing, rolled-in scale) reported honestly against the literature; domain shift and lab conditions documented as limitations"
+      ]
+    },
+    metrics: [
+      { label: { tr: "mAP@50 (genel)", en: "mAP@50 (all)" }, value: "0,735" },
+      { label: { tr: "scratches mAP@50", en: "scratches mAP@50" }, value: "0,934" },
+      { label: { tr: "Çıkarım", en: "Inference" }, value: "8,5 ms" }
+    ],
+    tags: ["YOLOv11", "PyTorch", "Computer Vision", "Gradio", "LLM", "Render"]
+  },
+  {
     id: "machine-failure",
     featured: true,
     date: { tr: "Ekim 2026", en: "Oct 2026" },
@@ -157,13 +187,13 @@ const PROJECTS = [
 
 const SKILLS = [
   { title: { tr: "Makine ve Derin Öğrenme", en: "Machine & Deep Learning" },
-    items: ["PyTorch", "scikit-learn", "Regresyon & Sınıflandırma", "Class Imbalance", "Cross-Validation", "Hiperparametre Optimizasyonu", "CNN"] },
+    items: ["PyTorch", "scikit-learn", "YOLO / Object Detection", "Regresyon & Sınıflandırma", "Class Imbalance", "Cross-Validation", "Hiperparametre Optimizasyonu", "CNN"] },
   { title: { tr: "Veri Analizi", en: "Data Analysis" },
     items: ["pandas", "NumPy", "matplotlib", "seaborn", "Jupyter", "EDA", "Feature Engineering", "Leakage Tespiti"] },
   { title: { tr: "LLM ve Yapay Zeka Ajanları", en: "LLMs & AI Agents" },
     items: ["LLM", "RAG", "AI Agents", "Prompt Tasarımı", "Otomasyon"] },
   { title: { tr: "MLOps ve Dağıtım", en: "MLOps & Deployment" },
-    items: ["FastAPI", "Docker", "Render", "REST API", "Model Serileştirme"] },
+    items: ["FastAPI", "Gradio", "Docker", "Render", "REST API", "Model Serileştirme"] },
   { title: { tr: "Temel ve Araçlar", en: "Fundamentals & Tools" },
     items: ["Python", "Veri Yapıları", "Algoritmalar", "Git & GitHub", "HTML/CSS", "Linux"] }
 ];
@@ -269,7 +299,7 @@ const I18N = {
     nav_demo: "Canlı Demo", nav_github: "GitHub", menu_open: "Menüyü aç", menu_close: "Menüyü kapat",
     hero_cta1: "Modeli Tarayıcıda Dene",
     term_title: 'terminal — "help" yazmayı dene',
-    typed: ["pytorch ile model eğitiyorum", "llm tabanlı ajanlar geliştiriyorum", "veri sızıntısını yakalıyorum", "fastapi ile modeli canlıya alıyorum", "class imbalance ile uğraşıyorum", "readme'yi uzun yazıyorum"],
+    typed: ["pytorch ile model eğitiyorum", "yolo ile kusur tespiti yapıyorum", "llm tabanlı ajanlar geliştiriyorum", "veri sızıntısını yakalıyorum", "fastapi ile modeli canlıya alıyorum", "class imbalance ile uğraşıyorum", "readme'yi uzun yazıyorum"],
     demo_title: "Canlı Demo: Arıza Tahmini",
     demo_intro: "Aşağıdaki model, makine arıza sınıflandırıcı projesinde PyTorch ile eğittiğim ağın ta kendisi. Ağırlıkları dışa aktarıp ileri geçişi JavaScript ile yeniden yazdım; yani sunucuya hiçbir veri gitmiyor, tahmin tarayıcınızda hesaplanıyor. Kaydırıcıları oynatın.",
     f_type: "Ürün kalite sınıfı", f_air: "Hava sıcaklığı", f_proc: "Proses sıcaklığı", f_rpm: "Devir", f_torque: "Tork", f_wear: "Takım aşınması",
@@ -308,7 +338,7 @@ const I18N = {
     nav_demo: "Live Demo", nav_github: "GitHub", menu_open: "Open menu", menu_close: "Close menu",
     hero_cta1: "Try the Model in Your Browser",
     term_title: 'terminal — try typing "help"',
-    typed: ["training models with pytorch", "building llm-based agents", "hunting data leakage", "shipping models with fastapi", "fighting class imbalance", "writing long readmes"],
+    typed: ["training models with pytorch", "detecting defects with yolo", "building llm-based agents", "hunting data leakage", "shipping models with fastapi", "fighting class imbalance", "writing long readmes"],
     demo_title: "Live Demo: Failure Prediction",
     demo_intro: "The model below is the exact network I trained with PyTorch for the machine failure classifier. I exported the weights and rewrote the forward pass in JavaScript, so nothing is sent to a server: the prediction is computed in your browser. Play with the sliders.",
     f_type: "Product quality class", f_air: "Air temperature", f_proc: "Process temperature", f_rpm: "Rotational speed", f_torque: "Torque", f_wear: "Tool wear",
