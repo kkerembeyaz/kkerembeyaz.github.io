@@ -880,7 +880,7 @@ function renderGithub({ u, commits }) {
 
 /* ===== Demo 2: YOLOv11 in the browser (onnxruntime-web) ===== */
 const YOLO = {
-  url: "models/steel-defect-yolo11n.onnx",
+  url: "models/steel-defect-yolo11n.onnx?v=640",
   ortJs: "https://cdn.jsdelivr.net/npm/onnxruntime-web@1.20.1/dist/ort.min.js",
   ortBase: "https://cdn.jsdelivr.net/npm/onnxruntime-web@1.20.1/dist/",
   size: 640, rawConf: 0.05, iou: 0.45,
@@ -987,12 +987,30 @@ async function yoloRunOn(img, key) {
   if (!yoloRaw.has(key)) {
     const session = await yoloLoad();
     yoloSetStatus("loading", t("yolo_running"));
-    const lb = letterbox(img);
-    const input = new ort.Tensor("float32", lb.tensor, [1, 3, YOLO.size, YOLO.size]);
-    const res = await session.run({ [session.inputNames[0]]: input });
-    const out = res[session.outputNames[0]].data;
-    yoloRaw.set(key, decode(out, lb));
-    yoloSetStatus("ready", t("yolo_ready"));
+    const runAt = async (size) => {
+      YOLO.size = size;
+      const lb = letterbox(img);
+      const input = new ort.Tensor("float32", lb.tensor, [1, 3, size, size]);
+      const res = await session.run({ [session.inputNames[0]]: input });
+      return decode(res[session.outputNames[0]].data, lb);
+    };
+    try {
+      let dets;
+      try { dets = await runAt(YOLO.size); }
+      catch (e) {
+        // Model dosyası farklı bir giriş boyutuyla dışa aktarılmışsa (örn. eski 320 px sürümü) otomatik uyum sağla
+        const alt = YOLO.size === 640 ? 320 : 640;
+        console.warn("YOLO run failed at", YOLO.size, "retrying at", alt, e);
+        dets = await runAt(alt);
+      }
+      yoloRaw.set(key, dets);
+      yoloSetStatus("ready", t("yolo_ready"));
+    } catch (e) {
+      console.error("YOLO inference failed", e);
+      yoloSetStatus("error", t("yolo_error"));
+      $("yoloEmpty").classList.remove("off");
+      throw e;
+    }
   }
   yoloRender();
 }
