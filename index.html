@@ -13,7 +13,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css?v=9">
+  <link rel="stylesheet" href="style.css?v=10">
 </head>
 <body>
   <a class="skip" href="#projeler" data-i18n="skip">İçeriğe geç</a>
@@ -137,8 +137,9 @@
     <section id="demo" class="section container">
       <div class="section-head reveal">
         <span class="section-num mono">03</span>
-        <h2 data-i18n="demo_title">Canlı Demo: Arıza Tahmini</h2>
+        <h2 data-i18n="demo_title">Canlı Demolar</h2>
       </div>
+      <h3 class="demo-sub reveal" data-i18n="demo1_title">Demo 1 · Makine Arıza Tahmini (PyTorch ağırlıkları, tarayıcıda)</h3>
       <div class="demo reveal">
         <p class="demo-intro" data-i18n="demo_intro">Aşağıdaki model, makine arıza sınıflandırıcı projesinde PyTorch ile eğittiğim ağın ta kendisi. Ağırlıkları dışa aktarıp ileri geçişi JavaScript ile yeniden yazdım; yani sunucuya hiçbir veri gitmiyor, tahmin tarayıcınızda hesaplanıyor. Kaydırıcıları oynatın.</p>
         <div class="demo-controls">
@@ -167,6 +168,33 @@
           <div class="rules mono" id="rules"></div>
           <p class="demo-note" data-i18n="demo_note">Model: Linear(6,16) → ReLU → Linear(16,16) → ReLU → Linear(16,6). Girdi, eğitimdeki StandardScaler ile ölçekleniyor. Kural satırları AI4I veri setinin arıza üretme koşulları; modelin bunlara ne kadar yaklaştığını görebilirsiniz.</p>
           <a class="btn btn-ghost btn-sm" href="https://github.com/kkerembeyaz/machine-failure-type-classifier" target="_blank" rel="noopener" data-i18n="demo_repo">Projenin kaynak kodu ve README</a>
+        </div>
+      </div>
+
+      <h3 class="demo-sub reveal" id="demo-yolo" data-i18n="yolo_title">Demo 2 · Çelik Yüzey Kusur Tespiti (YOLOv11, tarayıcıda)</h3>
+      <div class="demo demo-yolo reveal">
+        <p class="demo-intro" data-i18n="yolo_intro">Çelik yüzey kusur denetçisi projesinde eğittiğim YOLOv11 modelini ONNX'e çevirdim; tespit, tarayıcınızda WebAssembly ile çalışıyor. Bir örnek seçin ya da kendi görselinizi yükleyin. İlk kullanımda model (10 MB) bir kez indirilir.</p>
+        <div class="yolo-left">
+          <div class="yolo-status mono" id="yoloStatus"><span class="dot"></span><span id="yoloStatusText" data-i18n="yolo_idle">Model hazır değil · bir örnek seçince yüklenir</span></div>
+          <div class="yolo-progress" id="yoloProgress"><i></i></div>
+          <div class="yolo-examples" id="yoloExamples"></div>
+          <div class="yolo-tools">
+            <label class="btn btn-ghost btn-sm" for="yoloFile" data-i18n="yolo_upload">Kendi görselini yükle</label>
+            <input type="file" id="yoloFile" accept="image/*" hidden>
+          </div>
+          <div class="field">
+            <label><span data-i18n="yolo_conf">Güven eşiği</span> <output id="o_conf" class="mono">0.25</output></label>
+            <input type="range" id="yoloConf" min="0.05" max="0.9" step="0.01" value="0.25">
+          </div>
+          <p class="yolo-scenario" id="yoloScenario"></p>
+        </div>
+        <div class="yolo-right">
+          <div class="yolo-canvas-wrap"><canvas id="yoloCanvas" width="320" height="320"></canvas><div class="yolo-empty mono" id="yoloEmpty" data-i18n="yolo_pick">← bir örnek seçin</div></div>
+          <div class="kpis" id="yoloKpis"></div>
+          <div class="dets-wrap"><table class="dets" id="yoloTable"></table></div>
+          <div class="report" id="yoloReport"></div>
+          <p class="demo-note" data-i18n="yolo_note">Model: YOLO11n (2,6 M parametre), NEU-DET üzerinde eğitildi, 320 px girişle ONNX'e aktarıldı; çıkarım onnxruntime-web (WASM) ile yapılıyor. Rapor, uygulamadaki kural tabanlı şablonun JavaScript karşılığıdır; görsel hiçbir sunucuya gönderilmez.</p>
+          <a class="btn btn-ghost btn-sm" href="https://github.com/kkerembeyaz/steel-surface-defect-inspector" target="_blank" rel="noopener" data-i18n="demo_repo">Projenin kaynak kodu ve README</a>
         </div>
       </div>
     </section>
@@ -244,6 +272,6 @@
   </footer>
 
   <script src="model.js?v=2"></script>
-  <script src="script.js?v=10"></script>
+  <script src="script.js?v=11"></script>
 </body>
 </html>

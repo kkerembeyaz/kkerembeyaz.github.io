@@ -12,6 +12,7 @@ const PROJECTS = [
     featured: true,
     date: { tr: "Kasım 2026", en: "Nov 2026" },
     live: "https://steel-surface-defect-inspector.onrender.com",
+    inpage: "#demo-yolo",
     repo: `${GITHUB}/steel-surface-defect-inspector`,
     title: { tr: "Çelik Yüzey Kusur Denetçisi", en: "Steel Surface Defect Inspector" },
     desc: {
@@ -42,6 +43,7 @@ const PROJECTS = [
     featured: true,
     date: { tr: "Ekim 2026", en: "Oct 2026" },
     live: "https://machine-failure-type-classifier.onrender.com",
+    inpage: "#demo",
     repo: `${GITHUB}/machine-failure-type-classifier`,
     title: { tr: "Makine Arıza Türü Sınıflandırıcı", en: "Machine Failure Type Classifier" },
     desc: {
@@ -295,17 +297,35 @@ const I18N = {
     contact_p: "Staj, proje iş birliği ya da sadece veri ve makine öğrenmesi üzerine sohbet için bana LinkedIn üzerinden ulaşabilirsiniz.",
     contact_btn: "LinkedIn'den Yaz",
     footer_note: "HTML · CSS · JS ile elle yazıldı, GitHub Pages'te yayında",
-    live: "Canlı Demo", code: "Kaynak Kod", team: "Grup projesi", theme: "Tema değiştir",
+    live: "Canlı Demo", inpage: "Sayfada dene", code: "Kaynak Kod", team: "Grup projesi", theme: "Tema değiştir",
     nav_demo: "Canlı Demo", nav_github: "GitHub", menu_open: "Menüyü aç", menu_close: "Menüyü kapat",
     hero_cta1: "Modeli Tarayıcıda Dene",
     term_title: 'terminal — "help" yazmayı dene',
     typed: ["pytorch ile model eğitiyorum", "yolo ile kusur tespiti yapıyorum", "llm tabanlı ajanlar geliştiriyorum", "veri sızıntısını yakalıyorum", "fastapi ile modeli canlıya alıyorum", "class imbalance ile uğraşıyorum", "readme'yi uzun yazıyorum"],
-    demo_title: "Canlı Demo: Arıza Tahmini",
+    demo_title: "Canlı Demolar",
     demo_intro: "Aşağıdaki model, makine arıza sınıflandırıcı projesinde PyTorch ile eğittiğim ağın ta kendisi. Ağırlıkları dışa aktarıp ileri geçişi JavaScript ile yeniden yazdım; yani sunucuya hiçbir veri gitmiyor, tahmin tarayıcınızda hesaplanıyor. Kaydırıcıları oynatın.",
     f_type: "Ürün kalite sınıfı", f_air: "Hava sıcaklığı", f_proc: "Proses sıcaklığı", f_rpm: "Devir", f_torque: "Tork", f_wear: "Takım aşınması",
     pred_label: "Tahmin",
     demo_note: "Model: Linear(6,16) → ReLU → Linear(16,16) → ReLU → Linear(16,6). Girdi, eğitimdeki StandardScaler ile ölçekleniyor. Kural satırları AI4I veri setinin arıza üretme koşulları; modelin bunlara ne kadar yaklaştığını görebilirsiniz.",
     demo_repo: "Projenin kaynak kodu ve README",
+    demo1_title: "Demo 1 · Makine Arıza Tahmini (PyTorch ağırlıkları, tarayıcıda)",
+    yolo_title: "Demo 2 · Çelik Yüzey Kusur Tespiti (YOLOv11, tarayıcıda)",
+    yolo_intro: "Çelik yüzey kusur denetçisi projesinde eğittiğim YOLOv11 modelini ONNX'e çevirdim; tespit, tarayıcınızda WebAssembly ile çalışıyor. Bir örnek seçin ya da kendi görselinizi yükleyin. İlk kullanımda model (10 MB) bir kez indirilir.",
+    yolo_idle: "Model hazır değil · bir örnek seçince yüklenir", yolo_loading: "Model indiriliyor", yolo_init: "Model başlatılıyor…", yolo_ready: "Model hazır · tarayıcıda çalışıyor", yolo_running: "Tespit yapılıyor…", yolo_error: "Model yüklenemedi; canlı demoyu Render'da deneyin",
+    yolo_upload: "Kendi görselini yükle", yolo_conf: "Güven eşiği", yolo_pick: "← bir örnek seçin", yolo_custom: "Yüklenen görsel: YOLOv11 modeli ile tarayıcıda analiz edildi.",
+    yolo_note: "Model: YOLO11n (2,6 M parametre), NEU-DET üzerinde eğitildi, 320 px girişle ONNX'e aktarıldı; çıkarım onnxruntime-web (WASM) ile yapılıyor. Rapor, uygulamadaki kural tabanlı şablonun JavaScript karşılığıdır; görsel hiçbir sunucuya gönderilmez.",
+    kpi_decision: "Kalite ön kararı", kpi_total: "Toplam kusur", kpi_dominant: "Baskın kusur", kpi_conf: "Ort. güven",
+    dec_pass: "ONAY", dec_pass_s: "Yüzeyde kusur saptanmadı", dec_warn: "İNCELEME", dec_warn_s: "Şüpheli yüzey anomalisi", dec_fail: "RED", dec_fail_s: "Operatör müdahalesi gerekli",
+    none: "Yok", clean: "Temiz yüzey", pcs: "adet", classes_n: "farklı sınıf", thresh: "Eşik",
+    th_class: "Kusur", th_conf: "Güven", th_region: "Bölge", th_box: "Kutu (px)", no_dets: "Bu eşikte tespit yok",
+    rep_title: "Kalite Kontrol Raporu (kural tabanlı şablon)", rep_summary: "Özet", rep_defects: "Tespit edilen kusurlar", rep_cause: "Olası kök neden", rep_action: "Önerilen aksiyon", rep_conf: "Güven notu",
+    rep_none_sum: "Belirlenen güven eşiği üzerinde çelik sac yüzeyinde herhangi bir kusur tespit edilmemiştir.", rep_none_cause: "Yüzeyde raporlanacak bir anomali gözlenmemiştir.", rep_none_action: "Standart parti akışına devam edilebilir; şüphe varsa güven eşiğini düşürerek tekrar inceleyin.",
+    rep_sum: "İncelenen çelik sac yüzeyinde {t} güven eşiği üzerinde {c} farklı sınıfta toplam {n} adet yüzey kusuru tespit edilmiştir.",
+    rep_line: "{n} adet (ort. güven {m}, maks {x}, bölge: {r})",
+    rep_confnote: "Tespitlerin ortalama güven skoru {m} ({lvl} seviye); bu değerlendirme bir ön tarama niteliğindedir, nihai kabul/ret kararı operatör muayenesiyle doğrulanmalıdır.",
+    rep_confnote0: "Bu analiz yalnızca YOLO modelinin {t} eşik değerindeki çıktısına dayanmaktadır; aydınlatma ve kamera açısı farklılıkları sonuçları etkileyebilir.",
+    lvl_high: "yüksek", lvl_mid: "orta", lvl_low: "düşük-orta",
+    reg: { top: "üst", middle: "orta", bottom: "alt", left: "sol", center: "merkez", right: "sağ" },
     preset_normal: "Normal çalışma", preset_hdf: "Isı dağılımı (HDF)", preset_pwf: "Güç arızası (PWF)", preset_osf: "Aşırı yük (OSF)", preset_twf: "Takım aşınması (TWF)",
     rule_hdf: "HDF kuralı: sıcaklık farkı < 8,6 K ve devir < 1380", rule_pwf: "PWF kuralı: güç < 3500 W veya > 9000 W", rule_osf: "OSF kuralı: aşınma × tork > eşik (L 11000 / M 12000 / H 13000)", rule_twf: "TWF kuralı: aşınma 200–240 dk arası",
     nf: "Arıza yok", conf: "güven",
@@ -334,17 +354,35 @@ const I18N = {
     contact_p: "For internships, project collaboration or just a chat about data and machine learning, reach out on LinkedIn.",
     contact_btn: "Message on LinkedIn",
     footer_note: "Hand-written in HTML · CSS · JS, hosted on GitHub Pages",
-    live: "Live Demo", code: "Source Code", team: "Team project", theme: "Toggle theme",
+    live: "Live Demo", inpage: "Try on this page", code: "Source Code", team: "Team project", theme: "Toggle theme",
     nav_demo: "Live Demo", nav_github: "GitHub", menu_open: "Open menu", menu_close: "Close menu",
     hero_cta1: "Try the Model in Your Browser",
     term_title: 'terminal — try typing "help"',
     typed: ["training models with pytorch", "detecting defects with yolo", "building llm-based agents", "hunting data leakage", "shipping models with fastapi", "fighting class imbalance", "writing long readmes"],
-    demo_title: "Live Demo: Failure Prediction",
+    demo_title: "Live Demos",
     demo_intro: "The model below is the exact network I trained with PyTorch for the machine failure classifier. I exported the weights and rewrote the forward pass in JavaScript, so nothing is sent to a server: the prediction is computed in your browser. Play with the sliders.",
     f_type: "Product quality class", f_air: "Air temperature", f_proc: "Process temperature", f_rpm: "Rotational speed", f_torque: "Torque", f_wear: "Tool wear",
     pred_label: "Prediction",
     demo_note: "Model: Linear(6,16) → ReLU → Linear(16,16) → ReLU → Linear(16,6). Inputs are scaled with the StandardScaler from training. The rule lines are the failure-generation conditions of the AI4I dataset, so you can see how closely the model tracks them.",
     demo_repo: "Source code and README",
+    demo1_title: "Demo 1 · Machine Failure Prediction (PyTorch weights, in-browser)",
+    yolo_title: "Demo 2 · Steel Surface Defect Detection (YOLOv11, in-browser)",
+    yolo_intro: "I exported the YOLOv11 model from my steel surface defect inspector project to ONNX; detection runs in your browser via WebAssembly. Pick a sample or upload your own image. The model (10 MB) is downloaded once on first use.",
+    yolo_idle: "Model not loaded · loads when you pick a sample", yolo_loading: "Downloading model", yolo_init: "Initialising model…", yolo_ready: "Model ready · running in your browser", yolo_running: "Detecting…", yolo_error: "Model failed to load; try the live demo on Render",
+    yolo_upload: "Upload your own image", yolo_conf: "Confidence threshold", yolo_pick: "← pick a sample", yolo_custom: "Uploaded image: analysed in-browser with the YOLOv11 model.",
+    yolo_note: "Model: YOLO11n (2.6M parameters) trained on NEU-DET, exported to ONNX at 320 px; inference via onnxruntime-web (WASM). The report is a JavaScript port of the app's rule-based template; the image never leaves your browser.",
+    kpi_decision: "Quality decision", kpi_total: "Total defects", kpi_dominant: "Dominant defect", kpi_conf: "Avg. confidence",
+    dec_pass: "PASS", dec_pass_s: "No defects on the surface", dec_warn: "REVIEW", dec_warn_s: "Suspicious surface anomaly", dec_fail: "REJECT", dec_fail_s: "Operator intervention required",
+    none: "None", clean: "Clean surface", pcs: "pcs", classes_n: "distinct classes", thresh: "Threshold",
+    th_class: "Defect", th_conf: "Conf.", th_region: "Region", th_box: "Box (px)", no_dets: "No detections at this threshold",
+    rep_title: "Quality Inspection Report (rule-based template)", rep_summary: "Summary", rep_defects: "Detected defects", rep_cause: "Possible root cause", rep_action: "Recommended action", rep_conf: "Confidence note",
+    rep_none_sum: "No defect was detected on the steel sheet surface above the selected confidence threshold.", rep_none_cause: "No anomaly worth reporting was observed on the surface.", rep_none_action: "The batch can continue in standard flow; if in doubt, lower the confidence threshold and re-inspect.",
+    rep_sum: "A total of {n} surface defects in {c} distinct classes were detected above the {t} confidence threshold.",
+    rep_line: "{n} pcs (mean conf. {m}, max {x}, region: {r})",
+    rep_confnote: "Mean detection confidence is {m} ({lvl}); this assessment is a preliminary screening and the final accept/reject decision must be confirmed by operator inspection.",
+    rep_confnote0: "This analysis relies solely on the YOLO model output at the {t} threshold; lighting and camera-angle differences may affect results.",
+    lvl_high: "high", lvl_mid: "medium", lvl_low: "low-to-medium",
+    reg: { top: "top", middle: "middle", bottom: "bottom", left: "left", center: "center", right: "right" },
     preset_normal: "Normal operation", preset_hdf: "Heat dissipation (HDF)", preset_pwf: "Power failure (PWF)", preset_osf: "Overstrain (OSF)", preset_twf: "Tool wear (TWF)",
     rule_hdf: "HDF rule: temp difference < 8.6 K and rpm < 1380", rule_pwf: "PWF rule: power < 3500 W or > 9000 W", rule_osf: "OSF rule: wear × torque > threshold (L 11000 / M 12000 / H 13000)", rule_twf: "TWF rule: tool wear between 200–240 min",
     nf: "No failure", conf: "confidence",
@@ -375,7 +413,8 @@ function projectCard(p) {
     ? `<div class="metrics">${p.metrics.map((m) => `<span class="metric">${esc(pick(m.label))}: <b>${esc(m.value)}</b></span>`).join("")}</div>` : "";
   const links = `
     <div class="card-links">
-      ${p.live ? `<a class="btn btn-primary btn-sm" href="${p.live}" target="_blank" rel="noopener">${t("live")} ↗</a>` : ""}
+      ${p.inpage ? `<a class="btn btn-primary btn-sm" href="${p.inpage}">${t("inpage")} ↓</a>` : ""}
+      ${p.live ? `<a class="btn ${p.inpage ? "btn-ghost" : "btn-primary"} btn-sm" href="${p.live}" target="_blank" rel="noopener">${t("live")} ↗</a>` : ""}
       <a class="btn btn-ghost btn-sm" href="${p.repo}" target="_blank" rel="noopener">${t("code")}</a>
     </div>`;
   return `
@@ -425,6 +464,7 @@ function render() {
   $("termChips").innerHTML = ["help", "projects", "experience", "predict", "sudo hire kerem"].map((c) => `<button type="button" data-cmd="${c}">${c}</button>`).join("");
 
   demoUpdate();
+  yoloRender();
   initTilt();
   revealCheck();
   if (ghCache) renderGithub(ghCache);
@@ -836,6 +876,189 @@ function renderGithub({ u, commits }) {
   addEventListener("mousedown", () => root.classList.add("cursor-down"));
   addEventListener("mouseup", () => root.classList.remove("cursor-down"));
   addEventListener("blur", () => root.classList.add("cursor-out"));
+})();
+
+/* ===== Demo 2: YOLOv11 in the browser (onnxruntime-web) ===== */
+const YOLO = {
+  url: "models/steel-defect-yolo11n.onnx",
+  ortJs: "https://cdn.jsdelivr.net/npm/onnxruntime-web@1.20.1/dist/ort.min.js",
+  ortBase: "https://cdn.jsdelivr.net/npm/onnxruntime-web@1.20.1/dist/",
+  size: 320, rawConf: 0.05, iou: 0.45,
+  classes: ["crazing", "inclusion", "patches", "pitted_surface", "rolled-in_scale", "scratches"],
+  colors: { crazing: "#e63946", inclusion: "#2563eb", patches: "#2a9d8f", pitted_surface: "#e9c46a", "rolled-in_scale": "#6366f1", scratches: "#8ac926" },
+  label: {
+    tr: { crazing: "Kılcal Çatlak", inclusion: "Kalıntı / Cüruf", patches: "Yüzey Lekesi", pitted_surface: "Çukurlaşma", "rolled-in_scale": "Hadde Tufalı", scratches: "Yüzey Çiziği" },
+    en: { crazing: "Crazing", inclusion: "Inclusion", patches: "Patches", pitted_surface: "Pitted surface", "rolled-in_scale": "Rolled-in scale", scratches: "Scratches" }
+  },
+  knowledge: {
+    tr: {
+      crazing: ["Haddeleme veya soğutma esnasındaki ısıl gerilmeler ya da kalıp-yüzey sürtünmesi kaynaklı olabilir.", "Soğutma hızı profillerini ve haddeleme sıcaklık dengesini kontrol edin; çatlak derinliğini doğrulayın."],
+      inclusion: ["Sıvı çelik dökümü sırasında metalik olmayan oksit/cüruf kalıntılarının yüzeye yakın hapsolmasından kaynaklanıyor olabilir.", "Döküm potası cüruf temizliğini, refrakter aşınmasını ve tufal yıkama basıncını gözden geçirin."],
+      patches: ["Asitleme banyosu kalıntıları, düzensiz yağlama veya yerel oksidasyon kaynaklı olabilir.", "Yüzey temizleme/durulama hattını ve koruyucu yağlama nozullarını denetleyin."],
+      pitted_surface: ["İş merdanesi yüzeyindeki yerel aşınmalar veya kopan sert tufal parçacıklarının sac yüzeyine batmasıyla oluşmuş olabilir.", "İş merdanelerinin yüzey durumunu kontrol edin ve yüksek basınçlı tufal kırma hattını doğrulayın."],
+      "rolled-in_scale": ["Sıcak haddeleme öncesinde oksit tabakasının tam temizlenemeyip merdaneler altında saca basılmasından kaynaklanabilir.", "Tufal yıkama nozul basınçlarını, açılarını ve fırın atmosferindeki oksidasyon seviyesini inceleyin."],
+      scratches: ["Bant taşıma ruloları, kılavuz yan duvarları veya sarıcı-açıcı mekanizmalardaki mekanik sürtünme ve çapaklardan kaynaklanıyor olabilir.", "Taşıyıcı ruloları, kılavuz plakalarını ve hat üzerindeki temas noktalarını çapak/aşınma açısından kontrol edin."]
+    },
+    en: {
+      crazing: ["May stem from thermal stresses during rolling or cooling, or from die-surface friction.", "Check cooling-rate profiles and rolling temperature balance; verify crack depth."],
+      inclusion: ["May result from non-metallic oxide/slag residues trapped near the surface during casting.", "Review ladle slag cleaning, refractory wear and descaling pressure."],
+      patches: ["May be caused by pickling-bath residues, uneven oiling or local oxidation.", "Inspect the surface cleaning/rinsing line and protective oiling nozzles."],
+      pitted_surface: ["May be caused by local wear on work rolls or hard scale particles pressed into the sheet.", "Check work-roll surface condition and verify the high-pressure descaling line."],
+      "rolled-in_scale": ["May be caused by oxide scale not fully removed before hot rolling and pressed in under the rolls.", "Inspect descaler nozzle pressures and angles and the furnace atmosphere oxidation level."],
+      scratches: ["May stem from mechanical friction or burrs on strip transport rolls, guide walls or coiler/uncoiler mechanisms.", "Check transport rolls, guide plates and contact points along the line for burrs/wear."]
+    }
+  },
+  examples: [
+    ["01_vertical_scratch.jpg", { tr: "Senaryo 1 · Tekil dikey çizik: hadde yönünde tek doğrusal anomali, orta güven; operatör incelemesi önerilir.", en: "Scenario 1 · Single vertical scratch: one linear anomaly along the rolling direction, medium confidence; operator review advised." }],
+    ["02_multi_scratches.jpg", { tr: "Senaryo 2 · Çoklu paralel çizikler: taşıyıcı rulo veya kılavuz teması kaynaklı 3 çizik; çoklu kusur nedeniyle RED.", en: "Scenario 2 · Multiple parallel scratches: 3 scratches from transport-roll or guide contact; REJECT due to multiple defects." }],
+    ["03_horizontal_scratches.jpg", { tr: "Senaryo 3 · Karma kusur: aynı yüzeyde yatay çizik ve noktasal çukurlaşma bir arada.", en: "Scenario 3 · Mixed defects: horizontal scratches and pitting on the same surface." }],
+    ["04_surface_patch_large.jpg", { tr: "Senaryo 4 · Yüksek güvenli yüzey lekesi: merkezde geniş oksidasyon/asitleme lekesi.", en: "Scenario 4 · High-confidence patch: large oxidation/pickling stain at the centre." }],
+    ["05_multi_patches.jpg", { tr: "Senaryo 5 · Çoklu bölgesel leke: yüzeye yayılmış birden fazla kusur; temizlik hattı kontrol edilmeli.", en: "Scenario 5 · Multiple regional patches: several defects spread across the surface; check the cleaning line." }],
+    ["06_slag_inclusion.jpg", { tr: "Senaryo 6 · Belirgin cüruf kalıntısı: döküm/haddeleme kaynaklı iki yüksek güvenli kalıntı.", en: "Scenario 6 · Prominent slag inclusion: two high-confidence inclusions from casting/rolling." }],
+    ["07_pitted_surface.jpg", { tr: "Senaryo 7 · Düşük güvenli sınır anomalisi: eşik düşürülünce ortaya çıkan mikro anomali, eşik yükselince filtrelenir.", en: "Scenario 7 · Low-confidence borderline anomaly: appears only when the threshold is lowered, filtered out above it." }],
+    ["08_rolled_in_scale.jpg", { tr: "Senaryo 8 · Ağır kusur yoğunluğu: yüzey genelinde yaygın tufal/kalıntı dağılımı; kritik RED.", en: "Scenario 8 · Heavy defect density: widespread scale/inclusion across the surface; critical REJECT." }],
+    ["09_crazing_network.jpg", { tr: "Senaryo 9 · Çoklu sınıf: sol-orta bölgede leke ve sağ kenarda dikey çizik.", en: "Scenario 9 · Multi-class: a patch at the left-middle and a vertical scratch at the right edge." }],
+    ["10_clean_reference.jpg", { tr: "Senaryo 10 · Kusursuz referans sac: hiçbir yüzey kusuru yok; ONAY.", en: "Scenario 10 · Clean reference sheet: no surface defects; PASS." }]
+  ]
+};
+let yoloSession = null, yoloLoading = null, yoloImg = null, yoloKey = null, yoloRaw = new Map(), yoloCurrent = null;
+const yStatus = $("yoloStatus"), yStatusText = $("yoloStatusText"), yProg = $("yoloProgress");
+function yoloSetStatus(cls, text) { yStatus.className = "yolo-status mono " + cls; yStatusText.textContent = text; yStatus.dataset.state = cls; }
+function loadScript(src) { return new Promise((res, rej) => { const s = document.createElement("script"); s.src = src; s.onload = res; s.onerror = rej; document.head.appendChild(s); }); }
+async function fetchWithProgress(url, onProgress) {
+  const r = await fetch(url); if (!r.ok) throw new Error(r.status);
+  const total = +r.headers.get("content-length") || 0; const reader = r.body.getReader(); const chunks = []; let got = 0;
+  for (;;) { const { done, value } = await reader.read(); if (done) break; chunks.push(value); got += value.length; onProgress(total ? got / total : 0); }
+  const out = new Uint8Array(got); let o = 0; for (const c of chunks) { out.set(c, o); o += c.length; } return out;
+}
+function yoloLoad() {
+  if (yoloSession) return Promise.resolve(yoloSession);
+  if (yoloLoading) return yoloLoading;
+  yoloLoading = (async () => {
+    try {
+      yoloSetStatus("loading", t("yolo_loading") + " 0%"); yProg.classList.add("on");
+      if (!window.ort) await loadScript(YOLO.ortJs);
+      ort.env.wasm.wasmPaths = YOLO.ortBase; ort.env.wasm.numThreads = 1;
+      const bytes = await fetchWithProgress(YOLO.url, (p) => { yProg.firstElementChild.style.width = (p * 100).toFixed(0) + "%"; yStatusText.textContent = `${t("yolo_loading")} ${(p * 100).toFixed(0)}%`; });
+      yoloSetStatus("loading", t("yolo_init"));
+      yoloSession = await ort.InferenceSession.create(bytes, { executionProviders: ["wasm"] });
+      yProg.classList.remove("on"); yoloSetStatus("ready", t("yolo_ready"));
+      return yoloSession;
+    } catch (e) { yProg.classList.remove("on"); yoloSetStatus("error", t("yolo_error")); yoloLoading = null; throw e; }
+  })();
+  return yoloLoading;
+}
+function letterbox(img) {
+  const S = YOLO.size, w = img.naturalWidth || img.width, h = img.naturalHeight || img.height;
+  const scale = Math.min(S / w, S / h); const nw = Math.round(w * scale), nh = Math.round(h * scale);
+  const dw = Math.round((S - nw) / 2 - 0.1), dh = Math.round((S - nh) / 2 - 0.1);
+  const c = document.createElement("canvas"); c.width = S; c.height = S; const ctx = c.getContext("2d");
+  ctx.fillStyle = "rgb(114,114,114)"; ctx.fillRect(0, 0, S, S); ctx.drawImage(img, dw, dh, nw, nh);
+  const d = ctx.getImageData(0, 0, S, S).data; const n = S * S; const f = new Float32Array(3 * n);
+  for (let i = 0; i < n; i++) { f[i] = d[i * 4] / 255; f[n + i] = d[i * 4 + 1] / 255; f[2 * n + i] = d[i * 4 + 2] / 255; }
+  return { tensor: f, scale, dw, dh, w, h };
+}
+function iouOf(a, b) {
+  const x1 = Math.max(a[0], b[0]), y1 = Math.max(a[1], b[1]), x2 = Math.min(a[2], b[2]), y2 = Math.min(a[3], b[3]);
+  const inter = Math.max(0, x2 - x1) * Math.max(0, y2 - y1); const ua = (a[2] - a[0]) * (a[3] - a[1]) + (b[2] - b[0]) * (b[3] - b[1]) - inter;
+  return ua > 0 ? inter / ua : 0;
+}
+function decode(out, lb) {
+  const nc = YOLO.classes.length, N = out.length / (4 + nc); const cands = [];
+  for (let i = 0; i < N; i++) {
+    let best = 0, bi = -1; for (let c = 0; c < nc; c++) { const s = out[(4 + c) * N + i]; if (s > best) { best = s; bi = c; } }
+    if (best < YOLO.rawConf) continue;
+    const cx = out[i], cy = out[N + i], w = out[2 * N + i], h = out[3 * N + i];
+    const box = [(cx - w / 2 - lb.dw) / lb.scale, (cy - h / 2 - lb.dh) / lb.scale, (cx + w / 2 - lb.dw) / lb.scale, (cy + h / 2 - lb.dh) / lb.scale]
+      .map((v, k) => Math.min(Math.max(0, v), k % 2 ? lb.h : lb.w));
+    cands.push({ cls: bi, conf: best, box });
+  }
+  cands.sort((a, b) => b.conf - a.conf);
+  const keep = [];
+  for (const c of cands) { if (!keep.some((k) => k.cls === c.cls && iouOf(k.box, c.box) > YOLO.iou)) keep.push(c); if (keep.length >= 300) break; }
+  return keep.map((d) => {
+    const xc = (d.box[0] + d.box[2]) / 2 / lb.w, yc = (d.box[1] + d.box[3]) / 2 / lb.h;
+    const v = yc < .33 ? "top" : yc > .67 ? "bottom" : "middle", hz = xc < .33 ? "left" : xc > .67 ? "right" : "center";
+    return { ...d, name: YOLO.classes[d.cls], region: (v === "middle" && hz === "center") ? ["center"] : [v, hz] };
+  });
+}
+async function yoloRunOn(img, key) {
+  yoloImg = img; yoloKey = key; $("yoloEmpty").classList.add("off");
+  if (!yoloRaw.has(key)) {
+    const session = await yoloLoad();
+    yoloSetStatus("loading", t("yolo_running"));
+    const lb = letterbox(img);
+    const input = new ort.Tensor("float32", lb.tensor, [1, 3, YOLO.size, YOLO.size]);
+    const res = await session.run({ [session.inputNames[0]]: input });
+    const out = res[session.outputNames[0]].data;
+    yoloRaw.set(key, decode(out, lb));
+    yoloSetStatus("ready", t("yolo_ready"));
+  }
+  yoloRender();
+}
+function regionText(r) { return r.map((x) => t("reg")[x]).join("-"); }
+function yoloRender() {
+  const scen = $("yoloScenario"); const ex = YOLO.examples.find((e) => e[0] === yoloKey);
+  scen.textContent = yoloKey ? (ex ? pick(ex[1]) : t("yolo_custom")) : "";
+  $("yoloExamples").querySelectorAll("button").forEach((b) => b.classList.toggle("on", b.dataset.key === yoloKey));
+  if (!yoloImg || !yoloRaw.has(yoloKey)) return;
+  const thr = +$("yoloConf").value; $("o_conf").textContent = thr.toFixed(2);
+  const dets = yoloRaw.get(yoloKey).filter((d) => d.conf >= thr);
+  // canvas
+  const c = $("yoloCanvas"), W = yoloImg.naturalWidth, H = yoloImg.naturalHeight; const k = Math.max(1, Math.round(480 / Math.max(W, H)));
+  c.width = W * k; c.height = H * k; const ctx = c.getContext("2d"); ctx.imageSmoothingEnabled = true;
+  ctx.drawImage(yoloImg, 0, 0, c.width, c.height);
+  ctx.lineWidth = Math.max(2, k); ctx.font = `${Math.max(11, 6 * k)}px ${getComputedStyle(document.body).getPropertyValue("--mono")}`;
+  for (const d of dets) {
+    const col = YOLO.colors[d.name]; const [x1, y1, x2, y2] = d.box.map((v) => v * k);
+    ctx.strokeStyle = col; ctx.strokeRect(x1, y1, x2 - x1, y2 - y1);
+    const label = `${d.name} ${d.conf.toFixed(2)}`; const tw = ctx.measureText(label).width + 8, th = Math.max(14, 7 * k);
+    const ty = Math.max(0, y1 - th); ctx.fillStyle = col; ctx.fillRect(x1, ty, tw, th); ctx.fillStyle = "#fff"; ctx.fillText(label, x1 + 4, ty + th - Math.max(3, k));
+  }
+  // summary
+  const byCls = {}; dets.forEach((d) => { (byCls[d.name] ??= []).push(d); });
+  const total = dets.length, names = Object.keys(byCls).sort();
+  const mean = total ? dets.reduce((s, d) => s + d.conf, 0) / total : 0;
+  let dec = "pass", decT = t("dec_pass"), decS = t("dec_pass_s"), domT = t("none"), domS = t("clean");
+  if (total) {
+    const dom = names.reduce((a, b) => (byCls[b].length > byCls[a].length || (byCls[b].length === byCls[a].length && Math.max(...byCls[b].map((d) => d.conf)) > Math.max(...byCls[a].map((d) => d.conf)))) ? b : a);
+    domT = YOLO.label[lang][dom]; domS = `${dom} (${byCls[dom].length} ${t("pcs")})`;
+    if (total >= 3 || mean >= 0.70) { dec = "fail"; decT = t("dec_fail"); decS = t("dec_fail_s"); } else { dec = "warn"; decT = t("dec_warn"); decS = t("dec_warn_s"); }
+  }
+  $("yoloKpis").innerHTML = `
+    <div class="kpi ${dec}"><div class="k">${t("kpi_decision")}</div><div class="v">${decT}</div><div class="s">${decS}</div></div>
+    <div class="kpi"><div class="k">${t("kpi_total")}</div><div class="v">${total}</div><div class="s">${names.length} ${t("classes_n")}</div></div>
+    <div class="kpi"><div class="k">${t("kpi_dominant")}</div><div class="v" style="font-size:.95rem">${esc(domT)}</div><div class="s">${esc(domS)}</div></div>
+    <div class="kpi"><div class="k">${t("kpi_conf")}</div><div class="v">${total ? (mean * 100).toFixed(1) + "%" : "—"}</div><div class="s">${t("thresh")}: ${thr.toFixed(2)}</div></div>`;
+  $("yoloTable").innerHTML = `<tr><th>${t("th_class")}</th><th>${t("th_conf")}</th><th>${t("th_region")}</th><th>${t("th_box")}</th></tr>` +
+    (total ? dets.map((d) => `<tr><td><i class="sw" style="background:${YOLO.colors[d.name]}"></i>${esc(YOLO.label[lang][d.name])} <span class="muted">${d.name}</span></td><td>${(d.conf * 100).toFixed(1)}%</td><td>${regionText(d.region)}</td><td class="muted">${d.box.map((v) => Math.round(v)).join(", ")}</td></tr>`).join("")
+      : `<tr><td colspan="4" class="muted">${t("no_dets")}</td></tr>`);
+  // report
+  const K = YOLO.knowledge[lang]; const fmt = (s, o) => s.replace(/\{(\w+)\}/g, (_, k) => o[k]);
+  let rep = `<h4>${t("rep_title")}</h4><ul>`;
+  if (!total) {
+    rep += `<li><b>${t("rep_summary")}:</b> ${t("rep_none_sum")}</li><li><b>${t("rep_defects")}:</b> 0</li><li><b>${t("rep_cause")}:</b> ${t("rep_none_cause")}</li><li><b>${t("rep_action")}:</b> ${t("rep_none_action")}</li><li><b>${t("rep_conf")}:</b> ${fmt(t("rep_confnote0"), { t: thr.toFixed(2) })}</li>`;
+  } else {
+    const lvl = mean >= .7 ? t("lvl_high") : mean >= .45 ? t("lvl_mid") : t("lvl_low");
+    rep += `<li><b>${t("rep_summary")}:</b> ${fmt(t("rep_sum"), { t: thr.toFixed(2), c: names.length, n: total })}</li>`;
+    rep += `<li><b>${t("rep_defects")}:</b><div class="sub">${names.map((nm) => { const a = byCls[nm]; const regs = [...new Set(a.map((d) => regionText(d.region)))].join(", "); return `• <b>${esc(YOLO.label[lang][nm])}</b> (${nm}): ${fmt(t("rep_line"), { n: a.length, m: (a.reduce((s, d) => s + d.conf, 0) / a.length).toFixed(2), x: Math.max(...a.map((d) => d.conf)).toFixed(2), r: regs })}`; }).join("")}</div></li>`;
+    rep += `<li><b>${t("rep_cause")}:</b><div class="sub">${names.map((nm) => `• <b>${nm}</b>: ${K[nm][0]}`).join("")}</div></li>`;
+    rep += `<li><b>${t("rep_action")}:</b><div class="sub">${names.map((nm) => `• <b>${nm}</b>: ${K[nm][1]}`).join("")}</div></li>`;
+    rep += `<li><b>${t("rep_conf")}:</b> ${fmt(t("rep_confnote"), { m: mean.toFixed(2), lvl })}</li>`;
+  }
+  $("yoloReport").innerHTML = rep + "</ul>";
+}
+(function initYolo() {
+  $("yoloExamples").innerHTML = YOLO.examples.map(([f], i) => `<button type="button" data-key="${f}" title="${i + 1}"><img src="assets/steel/${f}" alt="" loading="lazy" width="200" height="200"><span>${i + 1}</span></button>`).join("");
+  $("yoloExamples").addEventListener("click", (e) => {
+    const b = e.target.closest("[data-key]"); if (!b) return;
+    const img = new Image(); img.onload = () => yoloRunOn(img, b.dataset.key).catch(() => {}); img.src = "assets/steel/" + b.dataset.key;
+  });
+  $("yoloFile").addEventListener("change", (e) => {
+    const f = e.target.files[0]; if (!f) return;
+    const img = new Image(); img.onload = () => { URL.revokeObjectURL(img.src); yoloRunOn(img, "upload:" + f.name + ":" + f.size).catch(() => {}); }; img.src = URL.createObjectURL(f);
+  });
+  $("yoloConf").addEventListener("input", yoloRender);
 })();
 
 /* ===== Boot ===== */

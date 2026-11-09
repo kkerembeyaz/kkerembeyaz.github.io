@@ -357,6 +357,51 @@ html.has-cursor input[type=text] { cursor: none; }
 .rules .no::before { content: "· "; }
 .demo-note { font-size: 12.5px; color: var(--text-faint); margin: 0; }
 
+/* Demo 2: YOLO */
+.demo-sub { font-size: 1.05rem; font-weight: 600; color: var(--text-muted); margin: 0 0 14px; }
+.demo + .demo-sub { margin-top: 40px; }
+.yolo-status { display: flex; align-items: center; gap: 8px; font-size: 12px; color: var(--text-muted); margin-bottom: 8px; }
+.yolo-status .dot { background: var(--text-faint); box-shadow: none; }
+.yolo-status.loading .dot { background: #f59e0b; animation: pulse 1.2s infinite; }
+.yolo-status.ready .dot { background: var(--success); box-shadow: 0 0 0 4px var(--success-soft); }
+.yolo-status.error .dot { background: #ef4444; }
+.yolo-progress { height: 4px; background: var(--bg-soft); border-radius: 999px; overflow: hidden; margin-bottom: 14px; opacity: 0; transition: opacity .2s; }
+.yolo-progress.on { opacity: 1; }
+.yolo-progress i { display: block; height: 100%; width: 0; background: linear-gradient(90deg, var(--accent), var(--accent-2)); transition: width .2s; }
+.yolo-examples { display: grid; grid-template-columns: repeat(5, 1fr); gap: 8px; margin-bottom: 14px; }
+.yolo-examples button { position: relative; padding: 0; border: 2px solid var(--border); border-radius: 10px; overflow: hidden; background: var(--bg-soft); cursor: pointer; aspect-ratio: 1; transition: border-color .15s, transform .15s; }
+.yolo-examples button img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.yolo-examples button span { position: absolute; left: 4px; bottom: 4px; font: 600 10px var(--mono); color: #fff; background: rgba(0,0,0,.55); padding: 1px 5px; border-radius: 4px; }
+.yolo-examples button:hover { border-color: var(--accent); transform: translateY(-2px); }
+.yolo-examples button.on { border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-soft); }
+.yolo-tools { margin-bottom: 16px; }
+.yolo-scenario { font-size: 13px; color: var(--text-muted); margin: 6px 0 0; min-height: 2.6em; }
+.yolo-right { display: flex; flex-direction: column; gap: 14px; }
+.yolo-canvas-wrap { position: relative; border-radius: 14px; overflow: hidden; background: var(--bg-soft); border: 1px solid var(--border); aspect-ratio: 1; max-width: 420px; }
+.yolo-canvas-wrap canvas { width: 100%; height: 100%; display: block; image-rendering: auto; }
+.yolo-empty { position: absolute; inset: 0; display: grid; place-items: center; color: var(--text-faint); font-size: 13px; }
+.yolo-empty.off { display: none; }
+.kpis { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; }
+.kpi { background: var(--bg-soft); border: 1px solid var(--border); border-radius: 10px; padding: 10px 12px; min-width: 0; }
+.kpi .k { font: 600 10.5px var(--mono); letter-spacing: .05em; text-transform: uppercase; color: var(--text-faint); }
+.kpi .v { font-size: 1.05rem; font-weight: 800; line-height: 1.2; margin-top: 2px; }
+.kpi .s { font-size: 11.5px; color: var(--text-muted); }
+.kpi.pass .v { color: var(--success); } .kpi.warn .v { color: #f59e0b; } .kpi.fail .v { color: #ef4444; }
+.dets-wrap { overflow-x: auto; }
+.dets { width: 100%; border-collapse: collapse; font-size: 12.5px; }
+.dets th, .dets td { text-align: left; padding: 7px 8px; border-bottom: 1px solid var(--border); white-space: nowrap; }
+.dets th { font: 600 11px var(--mono); color: var(--text-faint); text-transform: uppercase; letter-spacing: .05em; }
+.dets td:nth-child(2) { font-family: var(--mono); }
+.dets .sw { display: inline-block; width: 10px; height: 10px; border-radius: 3px; margin-right: 6px; vertical-align: -1px; }
+.dets .muted { color: var(--text-faint); }
+.report { font-size: 13.5px; color: var(--text-muted); background: var(--bg-soft); border: 1px solid var(--border); border-radius: 12px; padding: 14px 16px; }
+.report h4 { margin: 0 0 8px; font-size: 13px; color: var(--text); }
+.report ul { margin: 0; padding-left: 18px; display: grid; gap: 4px; }
+.report li::marker { color: var(--accent); }
+.report b { color: var(--text); font-weight: 600; }
+.report .sub { padding-left: 18px; margin-top: 2px; display: grid; gap: 2px; }
+@media (max-width: 720px) { .kpis { grid-template-columns: 1fr 1fr; } .yolo-examples { grid-template-columns: repeat(5, 1fr); gap: 6px; } }
+
 /* ===== GitHub live ===== */
 .gh-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
 .gh-card { background: var(--bg-elev); border: 1px solid var(--border); border-radius: var(--radius); padding: 22px; min-width: 0; }
